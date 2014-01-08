@@ -7,41 +7,16 @@ software.
 
 Read these introductions to unittesting with gtest first:
 
-https://code.google.com/p/googletest/wiki/Primer
+- https://code.google.com/p/googletest/wiki/Primer
 
-https://code.google.com/p/googletest/wiki/AdvancedGuide
+- https://code.google.com/p/googletest/wiki/AdvancedGuide
 
 Further resources:
 
-https://code.google.com/p/googletest/wiki/FAQ
+- https://code.google.com/p/googletest/wiki/FAQ
 
-http://www.cygnus-software.com/papers/comparingfloats/comparingfloats.htm
+- http://www.cygnus-software.com/papers/comparingfloats/comparingfloats.htm
 
-
-#### Test small components Don’t try to test large components all at
-once. Instead, test individual functions that have well-defined inputs
-and outputs.
-
-```
-TEST(RadialDistortionWithJacobian_Ordinary) {
-    double k[] = { -0.2, 0.06, 0.0 };
-    double p[] = { -1.5, -2.5 };
-    double xd[] = { 0.3, 0.2 };
-    double xc[2], J[4];
-    RadialDistortionWithJacobian(xc, J, xd, k, p);
-    double J_expected[] = { 0.88401552, -0.07730106, -0.07730106,  0.85240121 };
-    CHECK_CLOSE_FRACTION(xc[0], 0.28926505, 1e-6);
-    EXPECT_NEAR(xc[1], 0.18300459, 1e-6);
-    CHECK_CLOSE_ARRAYS(J, J_expected, 4, 1e-8);
-}
-```
-
-#### Each unittest should test only one function
-
-Where possible, factor code out of monolithic functions/classes and
-into small, well-defined free functions in order to make it testable.
-
-#### Factor code out of inner loops into free functions (inlining if necessary)
 
 #### Prefer `EXPECT_*` to `ASSERT_*`
 
@@ -58,6 +33,7 @@ TEST(sqrt) {
  // next test safely
 	EXPECT_FLOAT_EQ(sqrt(100.0), 10.0);
 }
+```
 
 ```
 TEST(GetRowPointer) {
@@ -129,6 +105,27 @@ TEST(FunctionThatShouldReturnEvenValues) {
 ```
 
 Will produce output like “IsEven(x) failed”
+
+#### Test small components Don’t try to test large components all at once.
+
+Each unittest should test only one function. Where possible, factor
+code out of monolithic functions/classes and into small, well-defined
+free functions in order to make it testable. Test individual functions
+that have well-defined inputs and outputs.
+
+```
+TEST(RadialDistortionWithJacobian_Ordinary) {
+    double k[] = { -0.2, 0.06, 0.0 };
+    double p[] = { -1.5, -2.5 };
+    double xd[] = { 0.3, 0.2 };
+    double xc[2], J[4];
+    RadialDistortionWithJacobian(xc, J, xd, k, p);
+    double J_expected[] = { 0.88401552, -0.07730106, -0.07730106,  0.85240121 };
+    CHECK_CLOSE_FRACTION(xc[0], 0.28926505, 1e-6);
+    EXPECT_NEAR(xc[1], 0.18300459, 1e-6);
+    CHECK_CLOSE_ARRAYS(J, J_expected, 4, 1e-8);
+}
+```
 
 #### Do not use random number generators inside unittests
 
