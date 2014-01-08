@@ -1,21 +1,16 @@
 Unit-testing numeric software
 ===
 
-Unit testing makes software development more efficient and more
-robust. Here are some points relevant to unit testing numerical
-software.
+Unit testing aims to make software development more efficient and
+robust. This document contains some points relevant to unit testing
+numerical software.
 
-Read these introductions to unittesting with gtest first:
+First, read this general-purpose introduction to unittesting with
+gtest:
 
 - https://code.google.com/p/googletest/wiki/Primer
 
 - https://code.google.com/p/googletest/wiki/AdvancedGuide
-
-Further resources:
-
-- https://code.google.com/p/googletest/wiki/FAQ
-
-- http://www.cygnus-software.com/papers/comparingfloats/comparingfloats.htm
 
 
 #### Prefer `EXPECT_*` to `ASSERT_*`
@@ -593,3 +588,9 @@ TEST_F(JointNormalEquations, ThreeCameraFixture) {
     EXPECT_NEAR(inertial_cost, expected_inertial_cost, 1e-5);
 }
 ```
+
+#### Further resources
+
+https://code.google.com/p/googletest/wiki/FAQ
+
+http://www.cygnus-software.com/papers/comparingfloats/comparingfloats.htm
