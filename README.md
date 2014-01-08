@@ -129,8 +129,7 @@ use a random number generator inside unittests then the tests may
 sporadically pass or fail, and when they do fail they may not produce
 consistent failures.
 
-#### Even if you set the random seed to some deterministic value, do
-     not use random number generators inside unittests
+#### Even if you set the random seed to some deterministic value, do not use random number generators inside unittests
 
 When a test fails, it should generate error messages that make it as
 easy as possible to track down the problem. It is *not* sufficient for
@@ -140,8 +139,6 @@ of the problem as far as possible. If your test uses random data (even
 if it uses the *same* randomly generated data each time) then the
 error messages generated on failure will be useless for tracking down
 problems.
-
-For example, this test checks the result of 
 
 
 #### Use test fixtures to set up complicated data structures
