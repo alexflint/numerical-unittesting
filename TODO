@@ -1,0 +1,44 @@
+
+General points
+- organization of tests
+- unit testing is not integration testing
+- unit testing is not benchmarking
+
+Specific points
+- test *small* components
+- tests should elucidate errors, not just detect them
+  - tests should be illuminating
+  - tests should test just one thing
+  - tests should be deterministic
+  - tests should not involve multiple threads (except when testing multithreaded libraries)
+  - use macros in favour of boolean assertions
+- use fixtures to set up data structures
+- generate data independently (e.g. in python)
+  - keep the code that generates the data around
+  - do not generate data and then use that data as the test case
+- test the semantics you care about, not the ones that don’t matter
+  - e.g. placement of tracks in a track index
+- test sophisticated functions first
+- prefer simple cases with human-checkable results to arbitrary cases
+  - e.g. integer matrices, sparse matrices, etc
+- do not just compute the same algorithm in the unit test code
+
+How to write testable code
+- factor stuff out into free functions
+- factor inner loop code out into a free function and test that
+- make classes stateless if possible
+- give classes simple, well-defined semantics (“one-sentence explanations”)
+- do not test multi-threaded
+- use “NakedX” pattern if necessary
+- use mocks if necessary
+- do not “handle” errors opaquely deeply within code
+
+Examples
+- simple linear algebra tests
+- track table tests
+- bundle adjuster tests
+- image recognition tests
+
+Negative examples
+- Randomization
+  -> replace with deterministic, predictable code
